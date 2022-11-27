@@ -1,8 +1,16 @@
+import Student from '../models/Student';
+
 /* eslint-disable class-methods-use-this */
 class HomeController {
-  index(req, res) {
+  async index(req, res) {
+    const newStudent = await Student.create({
+      first_name: 'Davi',
+      last_name: 'Miller',
+      email: 'britodavi456@gmail.com',
+      age: 12,
+    });
     res.json({
-      requesAccepted: true,
+      newStudent,
     });
   }
 }
