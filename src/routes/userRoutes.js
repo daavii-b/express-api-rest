@@ -1,16 +1,20 @@
 import Router from 'express';
 import userController from '../controllers/UserController';
 
-const router = new Router();
-
-router.post('/', userController.store);
-
-export default router;
-
 /*
 - index -> Lista todos os usuários : GET
+- show -> Mostra um usuaŕio : GET
 - store/create -> Cria um usuário : POST
 - delete -> Exclui um usuário : DELETE
-- show -> Mostra um usuaŕio : GET
 - update -> Atualizar um usuário : PUT
 */
+
+const router = new Router();
+
+router.get('/', userController.index);
+router.post('/', userController.store);
+router.get('/:username', userController.show);
+router.put('/:username', userController.upgrade);
+router.delete('/:username', userController.delete);
+
+export default router;
