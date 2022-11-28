@@ -1,6 +1,3 @@
-/* eslint-disable class-methods-use-this */
-// import jwt from 'jsonwebtoken';
-
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 

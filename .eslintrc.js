@@ -11,5 +11,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'class-methods-use-this': 0,
+    'import/first': 0,
+    'no-param-reassign': 0,
   },
 };
