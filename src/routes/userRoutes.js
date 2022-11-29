@@ -3,19 +3,23 @@ import userController from '../controllers/UserController';
 import loginRequired from '../middlewares/loginRequired';
 
 /*
-- index -> Lista todos os usuários : GET
-- show -> Mostra um usuaŕio : GET
-- store/create -> Cria um usuário : POST
-- delete -> Exclui um usuário : DELETE
-- update -> Atualizar um usuário : PUT
+- index -> List all Users: GET
+- show -> Show an User : GET
+- store/create -> Make an User : POST
+- delete -> Delete an User : DELETE
+- update -> Update an User : PUT
 */
 
 const router = new Router();
 
-router.get('/', userController.index);
+// These routes don`t must exists, only admins must be allowed to acess these routes.
+// router.get('/', userController.index);
+// router.get('/:username', userController.show);
+
 router.post('/', userController.store);
-router.get('/:username', userController.show);
-router.put('/:username', loginRequired, userController.upgrade);
-router.delete('/:username', loginRequired, userController.delete);
+
+// User will be identifier by your token
+router.put('/', loginRequired, userController.upgrade);
+router.delete('/', loginRequired, userController.delete);
 
 export default router;

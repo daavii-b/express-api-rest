@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/User';
 
-export default (req, res, next) => {
+export default async (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -14,9 +15,23 @@ export default (req, res, next) => {
   try {
     const decodedData = jwt.verify(token, process.env.TOKEN_SECRET);
 
-    const { id, email } = decodedData;
+    const { id, username, email } = decodedData;
+
+    const user = await User.findOne({
+      where: {
+        id,
+        email,
+      },
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        errors: ['User not found, take a new token.'],
+      });
+    }
 
     req.userId = id;
+    req.userName = username;
     req.userEmail = email;
 
     return next();
