@@ -18,7 +18,7 @@ const router = new Router();
 
 router.post('/', userController.store);
 
-// User will be identifier by your token
+// User will be identified by your token
 router.put('/', loginRequired, userController.upgrade);
 router.delete('/', loginRequired, userController.delete);
 
